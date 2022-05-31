@@ -4,6 +4,7 @@ function NbaCard({nbaCard}) {
         <div className="card-body">
             <h5 className="card-title">Player Name</h5>
             <p>Team</p>
+            <p>Position</p>
             <p>Career ppg</p>
             <p>Career apg</p>
             <p>Career rpg</p>
