@@ -1,4 +1,8 @@
 package nbacards.data;
 
-public class TeamRepository {
+import nbacards.models.Team;
+import java.util.List;
+
+public interface TeamRepository {
+    List<Team> findAll();
 }
