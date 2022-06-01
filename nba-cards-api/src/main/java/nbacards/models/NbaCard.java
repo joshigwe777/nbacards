@@ -1,12 +1,22 @@
 package nbacards.models;
 
 public class NbaCard {
+    public int getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
+    }
+
+    private int cardId;
     private String name;
     private Double ppg;
     private Double apg;
     private Double rpg;
     private String position;
     private String imgUrl;
+    private int teamId;
 
     public String getImgUrl() {
         return imgUrl;
@@ -16,13 +26,15 @@ public class NbaCard {
         this.imgUrl = imgUrl;
     }
 
-    public NbaCard(String name, Double ppg, Double apg, Double rpg, String position, String imgUrl) {
+    public NbaCard(int cardId, String name, Double ppg, Double apg, Double rpg, String position, String imgUrl, int teamId) {
+        this.cardId = cardId;
         this.name = name;
         this.ppg = ppg;
         this.apg = apg;
         this.rpg = rpg;
         this.position = position;
         this.imgUrl = imgUrl;
+        this.teamId = teamId;
     }
 
     public String getName() {
@@ -63,5 +75,13 @@ public class NbaCard {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 }
