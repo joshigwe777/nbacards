@@ -26,6 +26,7 @@ public class NbaCard {
         this.imgUrl = imgUrl;
     }
 
+    public NbaCard() {}
     public NbaCard(int cardId, String name, Double ppg, Double apg, Double rpg, String position, String imgUrl, int teamId) {
         this.cardId = cardId;
         this.name = name;

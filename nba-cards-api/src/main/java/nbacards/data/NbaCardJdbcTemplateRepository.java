@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class NbaCardJdbcTemplateRepository {
+public class NbaCardJdbcTemplateRepository implements NbaCardRepository {
 
     private final JdbcTemplate jdbcTemplate;
     private final NbaCardMapper mapper = new NbaCardMapper();
