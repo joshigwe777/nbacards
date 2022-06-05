@@ -35,12 +35,38 @@ public class NbaCardService {
     public NbaCard findById(int cardId) {
         return repository.findById(cardId);
     }
+
     public Result<NbaCard> add(NbaCard card) {
-        return null;
+       Result<NbaCard> result = validate(card);
+       if (!result.isSuccess()) {
+           return result;
+       }
+       if(card.getCardId()>0) {
+           result.addMessage("id should not be set for add.", ResultType.INVALID);
+
+       }
+       if(result.isSuccess()) {
+           card = repository.add(card);
+           result.setPayload(card);
+       }
+       return result;
+
     }
 
     public Result<NbaCard> update(NbaCard card) {
-        return null;
+        Result<NbaCard> result = validate(card);
+        if(!result.isSuccess()) {
+            return result;
+        }
+        if(card.getCardId() <1) {
+            result.addMessage("id should be set for update.", ResultType.INVALID);
+
+        }
+        if(result.isSuccess() && !repository.update(card)) {
+            result.addMessage(notFoundMessage(card.getCardId()), ResultType.NOT_FOUND);
+        }
+        return result;
+
     }
 
     public Result<Void> deleteById(int id) {
