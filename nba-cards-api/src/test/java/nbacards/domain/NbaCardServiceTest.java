@@ -37,7 +37,7 @@ class NbaCardServiceTest {
     }
 
     @Test
-    void findByPosition() {
+    void shouldFindByPosition() {
         var card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
 
         when(repository.findByPosition("Point Guard")).thenReturn((List<NbaCard>) card);
@@ -46,31 +46,107 @@ class NbaCardServiceTest {
         assertNotNull(actual);
         assertEquals(actual.get(0).getName(), "Luka");
     }
-
     @Test
-    void findByTeam() {
+    void shouldNotFindByPosition() {
         var card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
 
-        when(repository.findByPosition("Point Guard")).thenReturn((List<NbaCard>) card);
+        when(repository.findByPosition("Shooting Guard")).thenReturn((List<NbaCard>) card);
 
-        List<NbaCard> actual = repository.findByPosition("Point Guard");
+        List<NbaCard> actual = repository.findByPosition("Shooting Guard");
+        assertEquals(0, actual.size());
+    }
+
+    @Test
+    void shouldFindByTeam() {
+        var card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
+
+        when(repository.findByTeam(2)).thenReturn((List<NbaCard>) card);
+
+        List<NbaCard> actual = repository.findByTeam(2);
         assertNotNull(actual);
         assertEquals(actual.get(0).getName(), "Luka");
     }
-
     @Test
-    void findById() {
+    void shouldNotFindByTeam() {
+        var card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
+
+        when(repository.findByTeam(2)).thenReturn((List<NbaCard>) card);
+        List<NbaCard> actual = repository.findByTeam(3);
+        assertEquals(0, actual.size());
     }
 
     @Test
-    void add() {
+    void shouldFindById() {
+        var card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
+
+        when(repository.findById(1)).thenReturn((card));
+
+        NbaCard actual = repository.findById(1);
+        assertEquals("Luka", actual.getName());
+    }
+    @Test
+    void shouldNotFindById() {
+        var card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
+
+        when(repository.findById(1)).thenReturn((card));
+
+        NbaCard actual = repository.findById(2);
+        assertNull(actual);
     }
 
     @Test
-    void update() {
+    void shouldAddValidCard() {
+        var card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
+
+        when(repository.add(card)).thenReturn(card);
+
+        Result actual = service.add(card);
+
+        assertTrue(actual.isSuccess());
+        assertNotNull(actual.getPayload());
+
+    }
+    @Test
+    void shouldNotAddCardWithBlankName() {
+
+    }
+    @Test
+    void shouldNotAddNullCard() {
+
+    }
+    @Test
+    void shouldNotAddCardWithNegativePoints() {
+
+    }
+    @Test
+    void shouldNotAddCardWithNegativeRebounds() {
+
+    }
+    @Test
+    void shouldNotAddCardWithNegativeAssists() {
+
+    }
+    @Test
+    void shouldNotAddCardWithInvalidImageUrl() {
+
+    }
+    @Test
+    void shouldNotAddCardWithoutTeam() {
+
     }
 
     @Test
-    void deleteById() {
+    void shouldUpdateValidCard() {
+    }
+    @Test
+    void shouldNotUpdateCardThatDoesNotExist() {
+
+    }
+
+    @Test
+    void shouldDeleteById() {
+    }
+    @Test
+    void shouldNotDeleteNonexistentCard() {
     }
 }
