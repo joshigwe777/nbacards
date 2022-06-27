@@ -1,6 +1,6 @@
-drop database if exists nba_cards;
-create database nba_cards;
-use nba_cards;
+drop database if exists nba_cards_test;
+create database nba_cards_test;
+use nba_cards_test;
 
 create table team (
     team_id int primary key auto_increment,
@@ -54,10 +54,10 @@ begin
     alter table app_role auto_increment = 1;
 	delete from app_user;
     alter table app_user auto_increment = 1;
-	delete from board_game;
-    alter table board_game auto_increment = 1;
-	delete from publisher;
-    alter table publisher auto_increment = 1;
+	delete from nba_card;
+    alter table nba_card auto_increment = 1;
+	delete from team;
+    alter table team auto_increment = 1;
 
     insert into app_role (`name`) values
         ('USER'),

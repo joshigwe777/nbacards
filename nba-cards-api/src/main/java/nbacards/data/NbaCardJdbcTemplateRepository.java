@@ -25,7 +25,7 @@ public class NbaCardJdbcTemplateRepository implements NbaCardRepository {
     public List<NbaCard> findAll() {
         final String sql = "select nba_card_id, `name`, image_url, team_id, " +
                 "ppg, apg, rpg, position " +
-                "from nba_card;";
+                "from nba_cards;";
         return jdbcTemplate.query(sql, mapper);
     }
     @Override
@@ -44,7 +44,7 @@ public class NbaCardJdbcTemplateRepository implements NbaCardRepository {
     }
     @Override
     public NbaCard add(NbaCard card) {
-        final String sql = "insert into board_game (`name`, image_url, publisher_id, weight, minimum_players, maximum_players) " +
+        final String sql = "insert into nba_cards (`name`, image_url, publisher_id, weight, minimum_players, maximum_players) " +
                 "values (?, ?, ?, ?, ?, ?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -69,7 +69,7 @@ public class NbaCardJdbcTemplateRepository implements NbaCardRepository {
     }
     @Override
     public boolean update(NbaCard card) {
-        final String sql = "update nba_card set "
+        final String sql = "update nba_cards set "
                 + "`name` = ?, "
                 + "image_url = ?, "
                 + "team_id = ?, "
@@ -77,7 +77,7 @@ public class NbaCardJdbcTemplateRepository implements NbaCardRepository {
                 + "ppg = ?, "
                 + "apg = ? "
                 + "rpg = ? "
-                + "where board_game_id = ?;";
+                + "where nba_card_id = ?;";
         return jdbcTemplate.update(sql,
                 card.getName(),
                 card.getImgUrl(),
@@ -90,7 +90,7 @@ public class NbaCardJdbcTemplateRepository implements NbaCardRepository {
     }
     @Override
     public boolean deleteById(int id) {
-        final String sql = "delete from nba_card where nba_card_id = ?;";
+        final String sql = "delete from nba_cards where nba_card_id = ?;";
         return jdbcTemplate.update(sql, id) > 0;
     }
 
@@ -98,7 +98,7 @@ public class NbaCardJdbcTemplateRepository implements NbaCardRepository {
     private List<NbaCard> findBy(String where, Object param) {
         final String sql = "select nba_game_id, `name`, image_url, team_id, " +
                 "ppg, apg, rpg, position " +
-                "from nba_card " + where;
+                "from nba_cards " + where;
 
         return jdbcTemplate.query(sql, mapper, param);
     }
