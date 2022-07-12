@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -29,6 +30,7 @@ public class NbaCardJdbcTemplateRepository implements NbaCardRepository {
         return jdbcTemplate.query(sql, mapper);
     }
     @Override
+    @Transactional
     public NbaCard findById(int id) {
         return findBy("where nba_card_id = ?;", id).stream()
                 .findFirst()
@@ -39,6 +41,7 @@ public class NbaCardJdbcTemplateRepository implements NbaCardRepository {
         return findBy("where `position` like concat('%', ?, '%');", position);
     }
     @Override
+    @Transactional
     public List<NbaCard> findByTeam(int teamId) {
         return findBy("where team_id = ?;", teamId);
     }
@@ -89,6 +92,7 @@ public class NbaCardJdbcTemplateRepository implements NbaCardRepository {
                 card.getCardId()) > 0;
     }
     @Override
+    @Transactional
     public boolean deleteById(int id) {
         final String sql = "delete from nba_cards where nba_card_id = ?;";
         return jdbcTemplate.update(sql, id) > 0;
