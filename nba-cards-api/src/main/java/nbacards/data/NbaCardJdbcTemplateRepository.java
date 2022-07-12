@@ -47,8 +47,8 @@ public class NbaCardJdbcTemplateRepository implements NbaCardRepository {
     }
     @Override
     public NbaCard add(NbaCard card) {
-        final String sql = "insert into nba_card (`name`, image_url, publisher_id, weight, minimum_players, maximum_players) " +
-                "values (?, ?, ?, ?, ?, ?);";
+        final String sql = "insert into nba_card (`name`, image_url, team_id, position, ppg, apg, rpg) " +
+                "values (?, ?, ?, ?, ?, ?, ?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {

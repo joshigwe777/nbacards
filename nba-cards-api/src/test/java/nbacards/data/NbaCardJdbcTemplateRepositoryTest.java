@@ -75,6 +75,7 @@ class NbaCardJdbcTemplateRepositoryTest {
         stephCurry.setPpg(25.0);
         stephCurry.setPosition("pg");
         stephCurry.setName("Stephen Curry");
+        stephCurry.setImgUrl("www.google.com");
         stephCurry.setTeamId(2);
         stephCurry.setApg(6.0);
         stephCurry.setRpg(5.5);
@@ -106,7 +107,7 @@ class NbaCardJdbcTemplateRepositoryTest {
         lebronJames.setCardId(1);
         lebronJames.setPosition("sf");
         lebronJames.setName("Lebron James");
-        lebronJames.setTeamId(4);
+        lebronJames.setTeamId(1);
         lebronJames.setApg(6.0);
         lebronJames.setRpg(5.5);
 
