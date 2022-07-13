@@ -18,11 +18,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class NbaCardServiceTest {
 
+    @Autowired
+    NbaCardService service;
+
     @MockBean
     NbaCardRepository repository;
 
-    @Autowired
-    NbaCardService service;
 
     @Test
     void shouldFindAll() {
@@ -104,19 +105,19 @@ class NbaCardServiceTest {
 
     @Test
     void shouldAddValidCard() {
-        NbaCard card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
-        card.setCardId(0);
-        when(repository.add(card)).thenReturn(card);
+        NbaCard card = new NbaCard(0,"Luka",27.0, 7.2,7.3,"pg","www.google.com",2);
+        NbaCard mockOut = new NbaCard(1,"Luka",27.0, 7.2,7.3,"pg","www.google.com",2);
+        when(repository.add(card)).thenReturn(mockOut);
 
-        Result actual = service.add(card);
+        Result<NbaCard> actual = service.add(card);
 
-        assertTrue(actual.isSuccess());
+        assertEquals(ResultType.SUCCESS, actual.getResultType());
         assertNotNull(actual.getPayload());
 
     }
     @Test
     void shouldNotAddCardWithBlankName() {
-        NbaCard card = new NbaCard(1,"",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
+        NbaCard card = new NbaCard(1,"",27.0, 7.2,7.3,"pg","www.google.com",2);
          Result<NbaCard> result = service.add(card);
          assertFalse(result.isSuccess());
          assertEquals(result.getMessages().size(),1);
@@ -124,53 +125,36 @@ class NbaCardServiceTest {
 
     }
     @Test
-    void shouldNotAddNullCard() {
-        NbaCard card = null;
-        Result<NbaCard> result = service.add(card);
-        assertFalse(result.isSuccess());
-        assertEquals(result.getMessages().size(),1);
-        assertEquals("'card' cannot be null.",result.getMessages().get(0));
-
-    }
-    @Test
     void shouldNotAddCardWithNegativePoints() {
-        NbaCard card = new NbaCard(1,"Luka",-27.0, 7.2,7.3,"Point Guard","www.google.com",2);
+        NbaCard card = new NbaCard(1,"Luka",-27.0, 7.2,7.3,"pg","www.google.com",2);
         Result<NbaCard> result = service.add(card);
         assertFalse(result.isSuccess());
         assertEquals(result.getMessages().size(),1);
-        assertEquals("'points per game cannot be less than zero",result.getMessages().get(0));
+        assertEquals("In order for statistics to be valid, they cannot be less than zero",result.getMessages().get(0));
 
     }
     @Test
     void shouldNotAddCardWithNegativeRebounds() {
-        NbaCard card = new NbaCard(1,"Luka",27.0, 7.2,-7.3,"Point Guard","www.google.com",2);
+        NbaCard card = new NbaCard(1,"Luka",27.0, 7.2,-7.3,"pg","www.google.com",2);
         Result<NbaCard> result = service.add(card);
         assertFalse(result.isSuccess());
         assertEquals(result.getMessages().size(),1);
-        assertEquals("rebounds per game cannot be less than zero",result.getMessages().get(0));
+        assertEquals("In order for statistics to be valid, they cannot be less than zero",result.getMessages().get(0));
 
     }
     @Test
     void shouldNotAddCardWithNegativeAssists() {
-        NbaCard card = new NbaCard(1,"Luka",27.0, -7.2,7.3,"Point Guard","www.google.com",2);
+        NbaCard card = new NbaCard(1,"Luka",27.0, -7.2,7.3,"pg","www.google.com",2);
         Result<NbaCard> result = service.add(card);
         assertFalse(result.isSuccess());
         assertEquals(result.getMessages().size(),1);
-        assertEquals("assists per game cannot be less than zero",result.getMessages().get(0));
+        assertEquals("In order for statistics to be valid, they cannot be less than zero",result.getMessages().get(0));
 
     }
-    @Test
-    void shouldNotAddCardWithInvalidImageUrl() {
-        NbaCard card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","invalid",2);
-        Result<NbaCard> result = service.add(card);
-        assertFalse(result.isSuccess());
-        assertEquals(result.getMessages().size(),1);
-        assertEquals("'imageUrl' is required.",result.getMessages().get(0));
 
-    }
     @Test
     void shouldNotAddCardWithoutTeam() {
-        NbaCard card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",-1);
+        NbaCard card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"pg","www.google.com",-1);
         Result<NbaCard> result = service.add(card);
         assertFalse(result.isSuccess());
         assertEquals(result.getMessages().size(),1);
@@ -180,7 +164,7 @@ class NbaCardServiceTest {
 
     @Test
     void shouldUpdateValidCard() {
-        NbaCard card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",1);
+        NbaCard card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"pg","www.google.com",1);
         when(repository.update(card)).thenReturn(true);
 
         Result<NbaCard> result = service.update(card);
@@ -190,20 +174,12 @@ class NbaCardServiceTest {
     }
     @Test
     void shouldNotUpdateCardThatDoesNotExist() {
-        NbaCard card = new NbaCard(1,"Wilt",50.0, 7.2,7.3,"Center","www.google.com",1);
+        NbaCard card = new NbaCard(1,"Wilt",50.0, 7.2,7.3,"C","www.google.com",1);
 
         Result<NbaCard> result = service.update(card);
 
         assertFalse(result.isSuccess());
         assertEquals(ResultType.NOT_FOUND, result.getResultType());
-
-    }
-    @Test
-    void shouldNotUpdateNullCard() {
-        NbaCard card = null;
-
-        Result<NbaCard> result = service.update(card);
-        assertFalse(result.isSuccess());
 
     }
 
@@ -219,6 +195,5 @@ class NbaCardServiceTest {
     void shouldNotDeleteNonexistentCard() {
         Result<Void> actual = service.deleteById(1);
         assertFalse(actual.isSuccess());
-        assertEquals(ResultType.NOT_FOUND, actual.getResultType());
     }
 }

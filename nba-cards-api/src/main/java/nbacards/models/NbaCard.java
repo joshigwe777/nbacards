@@ -25,19 +25,18 @@ public class NbaCard {
     @NotBlank(message = "'name' is required.")
     private String name;
 
-    @Min(value=0, message = "points per game cannot be less than zero")
+//    @Min(value=0, message = "points per game cannot be less than zero")
     private Double ppg;
 
-    @Min(value=0, message = "assists per game cannot be less than zero")
+//    @Min(value=0, message = "assists per game cannot be less than zero")
     private Double apg;
 
-    @Min(value=0, message = "rebounds per game cannot be less than zero")
+//    @Min(value=0, message = "rebounds per game cannot be less than zero")
     private Double rpg;
 
     private String position;
 
-    @Pattern(regexp = "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()!@:%_\\+.~#?&\\/\\/=]*)",
-            message = "'imageUrl' is required.")
+
     private String imgUrl;
 
     @Min(value = 1, message = "team is required")
