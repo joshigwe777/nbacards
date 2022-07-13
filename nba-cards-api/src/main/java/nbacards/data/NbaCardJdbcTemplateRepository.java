@@ -58,8 +58,8 @@ public class NbaCardJdbcTemplateRepository implements NbaCardRepository {
             ps.setInt(3, card.getTeamId());
             ps.setString(4, card.getPosition());
             ps.setDouble(5, card.getPpg());
-            ps.setDouble(5, card.getApg());
-            ps.setDouble(5, card.getRpg());
+            ps.setDouble(6, card.getApg());
+            ps.setDouble(7, card.getRpg());
             return ps;
         }, keyHolder);
 
