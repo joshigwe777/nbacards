@@ -10,6 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,8 +42,9 @@ class NbaCardServiceTest {
     @Test
     void shouldFindByPosition() {
         var card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
-
-        when(repository.findByPosition("Point Guard")).thenReturn((List<NbaCard>) card);
+        List<NbaCard> cards = new ArrayList<NbaCard>() ;
+        cards.add(card);
+        when(repository.findByPosition("Point Guard")).thenReturn(cards);
 
         List<NbaCard> actual = repository.findByPosition("Point Guard");
         assertNotNull(actual);
@@ -51,8 +53,9 @@ class NbaCardServiceTest {
     @Test
     void shouldNotFindByPosition() {
         var card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
-
-        when(repository.findByPosition("Shooting Guard")).thenReturn((List<NbaCard>) card);
+        List<NbaCard> cards = new ArrayList<NbaCard>() ;
+        cards.add(card);
+        when(repository.findByPosition("Point Guard")).thenReturn(cards);
 
         List<NbaCard> actual = repository.findByPosition("Shooting Guard");
         assertEquals(0, actual.size());
@@ -61,8 +64,9 @@ class NbaCardServiceTest {
     @Test
     void shouldFindByTeam() {
         var card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
-
-        when(repository.findByTeam(2)).thenReturn((List<NbaCard>) card);
+        List<NbaCard> cards = new ArrayList<NbaCard>() ;
+        cards.add(card);
+        when(repository.findByTeam(2)).thenReturn((cards));
 
         List<NbaCard> actual = repository.findByTeam(2);
         assertNotNull(actual);
@@ -71,8 +75,10 @@ class NbaCardServiceTest {
     @Test
     void shouldNotFindByTeam() {
         var card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
+        List<NbaCard> cards = new ArrayList<NbaCard>() ;
+        cards.add(card);
 
-        when(repository.findByTeam(2)).thenReturn((List<NbaCard>) card);
+        when(repository.findByTeam(2)).thenReturn(cards);
         List<NbaCard> actual = repository.findByTeam(3);
         assertEquals(0, actual.size());
     }
@@ -98,8 +104,8 @@ class NbaCardServiceTest {
 
     @Test
     void shouldAddValidCard() {
-        var card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
-
+        NbaCard card = new NbaCard(1,"Luka",27.0, 7.2,7.3,"Point Guard","www.google.com",2);
+        card.setCardId(0);
         when(repository.add(card)).thenReturn(card);
 
         Result actual = service.add(card);
