@@ -14,6 +14,7 @@ public class NbaCardMapper implements RowMapper<NbaCard> {
         card.setCardId(resultSet.getInt("card_id"));
         card.setName(resultSet.getString("name"));
         card.setPosition(resultSet.getString("position"));
+        card.setImgUrl(resultSet.getString("image_url"));
         card.setTeamId(resultSet.getInt("team_id"));
         card.setPpg(resultSet.getDouble("ppg"));
         card.setApg(resultSet.getDouble("apg"));

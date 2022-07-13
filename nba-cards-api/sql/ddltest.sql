@@ -13,9 +13,9 @@ create table nba_card (
     `name` varchar(150) not null,
     image_url varchar(250) not null,
     team_id int not null,
-    ppg decimal(3,2) not null,
-    apg decimal(3,2) not null,
-    rpg decimal(3,2) not null,
+    ppg decimal(5,3) not null,
+    apg decimal(5,3) not null,
+    rpg decimal(5,3) not null,
 	`position` varchar(250) not null,
     constraint fk_nba_card_team_id
         foreign key (team_id)
@@ -82,8 +82,8 @@ begin
 
     insert into nba_card (`name`, image_url, team_id, ppg, apg, rpg, `position`)
     values 
-		("Lebron James", "https://media.gettyimages.com/photos/lebron-james-of-the-los-angeles-lakers-dunks-against-the-atlanta-in-picture-id1194180180?s=612x612",1, 27.1, 7.4, 7.5,"Small Forward"),
-		("Jayson Tatum", "https://upload.wikimedia.org/wikipedia/commons/9/9f/Jayson_Tatum_%2851687926198%29_%28cropped%29.jpg", 2 , 20.9, 3.0, 6.6,"Small Forward"),
-		("Luka Doncic", "https://www.gannett-cdn.com/presto/2020/10/23/USAT/6fa5033f-9c44-4058-9d08-b80d61265fe6-Luka_Doncic.jpg?crop=3377,2529,x369,y147",3, 26.4, 8.0, 8.5, "Point Guard");
+		("Lebron James", "https://media.gettyimages.com/photos/lebron-james-of-the-los-angeles-lakers-dunks-against-the-atlanta-in-picture-id1194180180?s=612x612",1, 27.1, 7.4, 7.5,"sf"),
+		("Jayson Tatum", "https://upload.wikimedia.org/wikipedia/commons/9/9f/Jayson_Tatum_%2851687926198%29_%28cropped%29.jpg", 2 , 20.9, 3.0, 6.6,"sf"),
+		("Luka Doncic", "https://www.gannett-cdn.com/presto/2020/10/23/USAT/6fa5033f-9c44-4058-9d08-b80d61265fe6-Luka_Doncic.jpg?crop=3377,2529,x369,y147",3, 26.4, 8.0, 8.5, "pg");
 end //
 delimiter ;

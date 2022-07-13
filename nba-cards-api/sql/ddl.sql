@@ -11,11 +11,11 @@ create table team (
 create table nba_card (
 	card_id int primary key auto_increment,
     `name` varchar(150) not null,
-    image_url varchar(250) not null,
+    image_url varchar(350) not null,
     team_id int not null,
-    ppg decimal(3,2) not null,
-    apg decimal(3,2) not null,
-    rpg decimal(3,2) not null,
+    ppg decimal(5,3) not null,
+    apg decimal(5,3) not null,
+    rpg decimal(5,3) not null,
 	`position` varchar(250) not null,
     constraint fk_nba_card_team_id
         foreign key (team_id)

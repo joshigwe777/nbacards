@@ -46,7 +46,7 @@ class NbaCardJdbcTemplateRepositoryTest {
 
     @Test
     void shouldFindLukaDoncicByPosition() {
-        List<NbaCard> luka = repository.findByPosition("Point Guard");
+        List<NbaCard> luka = repository.findByPosition("pg");
         assertTrue(luka.stream().anyMatch(c->c.getName().equalsIgnoreCase("Luka Doncic")));
     }
 

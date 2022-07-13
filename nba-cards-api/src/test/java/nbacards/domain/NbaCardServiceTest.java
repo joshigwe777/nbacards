@@ -177,7 +177,7 @@ class NbaCardServiceTest {
         NbaCard card = new NbaCard(1,"Wilt",50.0, 7.2,7.3,"C","www.google.com",1);
 
         Result<NbaCard> result = service.update(card);
-
+        System.out.println(card.getImgUrl());
         assertFalse(result.isSuccess());
         assertEquals(ResultType.NOT_FOUND, result.getResultType());
 
