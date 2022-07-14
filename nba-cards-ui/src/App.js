@@ -1,5 +1,14 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import Heading from './Heading';
+import ConfirmDelete from './ConfirmDelete.js';
+import Login from './Login.js';
+import CardList from './CardList.js';
+import NotFound from './NotFound.js';
+import AuthContext from './contexts/AuthContext';
+import jwt_decode from 'jwt-decode';
+
+
 
 function App() {
 

@@ -4,6 +4,7 @@ import AuthContext from "./contexts/AuthContext";
 import {authenticate} from "./services/authApi";
 import ErrorSummary from "./ErrorSummary";
 
+
 function Login() {
 
     const [credentials, setCredentials] = useState({username:"", password: ""});
@@ -16,7 +17,7 @@ function Login() {
     const handleChange = (evt) => {
         const nextCredentials = {...credentials};
         nextCredentials[evt.target.name] = evt.target.value;
-        setCredentials[nextCredentials];
+        setCredentials(nextCredentials);
     };
 
     const handleSubmit = async evt => {
