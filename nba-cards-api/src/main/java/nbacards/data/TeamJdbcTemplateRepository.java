@@ -1,5 +1,6 @@
 package nbacards.data;
 
+import nbacards.models.NbaCard;
 import nbacards.models.Team;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -10,9 +11,12 @@ import java.util.List;
 public class TeamJdbcTemplateRepository implements TeamRepository {
 
     private final JdbcTemplate jdbcTemplate;
+    private final  TeamMapper mapper;
 
-    public TeamJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {
+
+    public TeamJdbcTemplateRepository(JdbcTemplate jdbcTemplate, TeamMapper mapper) {
         this.jdbcTemplate = jdbcTemplate;
+        this.mapper = mapper;
     }
 
     @Override
@@ -26,6 +30,18 @@ public class TeamJdbcTemplateRepository implements TeamRepository {
                 )
         ));
 
+    }
+    @Override
+    public Team findById(int id) {
+
+        return findBy("where team_id = ?", id).stream().findFirst().orElse(null);
+    }
+
+    private List<Team> findBy(String where, Object param) {
+        final String sql = "select team_id, team_name, city, team_id, " +
+                where;
+
+        return jdbcTemplate.query(sql, mapper, param);
     }
 
 }

@@ -12,6 +12,10 @@ public class Team {
         this.cityName = cityName;
     }
 
+    public Team() {
+
+    }
+
     public int getTeamId() {
         return teamId;
     }
