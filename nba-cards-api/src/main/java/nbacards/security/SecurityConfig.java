@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST,"/authenticate", "/register").permitAll()
                 .antMatchers(HttpMethod.GET, "/team").permitAll()
+                .antMatchers(HttpMethod.GET, "/team/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/nba-card", "/nba-card/*").permitAll()
                 .antMatchers(HttpMethod.POST, "/nba-card").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/nba-card/*").hasAnyRole("USER", "ADMIN")

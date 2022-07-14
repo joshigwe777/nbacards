@@ -2,6 +2,8 @@ package nbacards.controllers;
 
 import nbacards.domain.TeamService;
 import nbacards.models.Team;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,5 +25,11 @@ public class TeamController {
     }
 
     @GetMapping("/{id}")
-    public Team findById(@PathVariable int id) {return service.findById(id);}
+    public ResponseEntity<Team> findById(@PathVariable int id) {
+        Team team = service.findById(id);
+        if(team!=null) {
+            return new ResponseEntity<>(team, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }
