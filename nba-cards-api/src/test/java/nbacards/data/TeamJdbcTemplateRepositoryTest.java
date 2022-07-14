@@ -29,4 +29,9 @@ class TeamJdbcTemplateRepositoryTest {
         List<Team> teamList = repository.findAll();
         assertTrue(teamList.size()>=3);
     }
+    @Test
+    void shouldFindByLakersId() {
+        Team lakers = repository.findById(1);
+        assertEquals(1, lakers.getTeamId());
+    }
 }

@@ -20,6 +20,8 @@ public class TeamService {
 
     public List<Team> findAll() {
         return repository.findAll();
-
+    }
+    public Team findById(int id) {
+        return repository.findById(id);
     }
 }
