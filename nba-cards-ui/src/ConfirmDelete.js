@@ -1,7 +1,8 @@
-import { useEffect, useState, useContext } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { deleteById, fetchById } from "./services/nbaCardApi";
 import AuthContext from "./contexts/AuthContext";
+import NotFound from "./NotFound";
 
 
 function ConfirmDelete() {
@@ -12,21 +13,21 @@ function ConfirmDelete() {
 
     const { cardId } = useParams();
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (cardId) {
             fetchById(cardId)
                 .then((card) => setNbaCard(card))
-                .catch(() => history.push("/404"));
+                .catch(() => navigate("/404"));
         }
 
-    }, [cardId, history]);
+    }, [cardId, navigate]);
 
     const handleDelete = () => {
         deleteById(cardId, auth.user.token)
             .then(() => {
-                history.push("/");
+                navigate("/");
             })
             .catch(console.log);
 

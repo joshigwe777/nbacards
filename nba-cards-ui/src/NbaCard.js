@@ -1,3 +1,4 @@
+import React from "react";
 function NbaCard({nbaCard}) {
     return <div className="card">
         <img className="card-image"/>

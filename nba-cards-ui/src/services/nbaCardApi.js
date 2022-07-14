@@ -33,7 +33,7 @@ export async function save(card, token) {
     if(card.id > 0) {
         init.method = "PUT";
         const response = await fetch(`${url}/${card.id}`, init);
-        if (response.status == 400) {
+        if (response.status === 400) {
             const errors = await response.json();
             return Promise.reject(errors);
         }

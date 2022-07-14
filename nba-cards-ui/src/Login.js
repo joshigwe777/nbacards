@@ -1,5 +1,5 @@
-import {useContext, useState} from "react";
-import {useHistory} from "react-router-dom";
+import React, {useContext, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import AuthContext from "./contexts/AuthContext";
 import {authenticate} from "./services/authApi";
 import ErrorSummary from "./ErrorSummary";
@@ -12,7 +12,7 @@ function Login() {
 
     const auth = useContext(AuthContext);
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleChange = (evt) => {
         const nextCredentials = {...credentials};
@@ -26,7 +26,7 @@ function Login() {
         authenticate(credentials)
             .then((data) => {
                 auth.login(data.jwt_token);
-                history.push("/");
+                    navigate("/");
             })
             .catch(setErrors);
     }

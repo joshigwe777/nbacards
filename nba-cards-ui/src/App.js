@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Link, Route, Routes} from "react-router-dom";
 import Heading from './Heading';
 import ConfirmDelete from './ConfirmDelete.js';
 import Login from './Login.js';
@@ -23,9 +23,9 @@ function App() {
     nextUser.username = decodedToken.sub;
     nextUser.roles = decodedToken.authorities.split(",");
     nextUser.token = token;
-    nextUser.isAdmin = function () {
-      return this.roles?.includes("ROLE_ADMIN");
-    };
+    // nextUser.isAdmin = function () {
+    //   return this.roles?.includes("ROLE_ADMIN");
+    // };
 
     localStorage.setItem('token', token);
 
@@ -61,12 +61,12 @@ function App() {
       <AuthContext.Provider value={auth}>
         <Router>
           <Heading />
-          <Switch>
+          <Routes>
             <Route path={["/edit/:id", "/add"]}>
-              {auth.user.username ? <nbaCardForm /> : <Redirect to="/login" />}
+              {auth.user.username ? <nbaCardForm /> : <Link to="/login" />}
             </Route>
             <Route path="/delete/:gameId/">
-              {auth.user.username && auth.user.isAdmin() ? <ConfirmDelete /> : <Redirect to="/login" />}
+              {auth.user.username && auth.user.isAdmin() ? <ConfirmDelete /> : <Link to="/login" />}
             </Route>
             <Route path="/login">
               <Login />
@@ -77,7 +77,7 @@ function App() {
             <Route>
               <NotFound />
             </Route>
-          </Switch>
+          </Routes>
         </Router>
 
       </AuthContext.Provider>
