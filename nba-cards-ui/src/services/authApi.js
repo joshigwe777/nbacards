@@ -1,4 +1,4 @@
-const url = `${window.NBA_CARD_GAME_API_URL}/nbacard`;
+const url = `http://localhost8080/authenticate`;
 
 export async function authenticate(credentials) {
     const init = {

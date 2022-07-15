@@ -58,7 +58,7 @@ function App() {
 
   return (
     <div className="container">
-      <AuthContext.Provider value={auth}>
+      {/* <AuthContext.Provider value={auth}>
         <Router>
           <Heading />
           <Routes>
@@ -80,7 +80,8 @@ function App() {
           </Routes>
         </Router>
 
-      </AuthContext.Provider>
+      </AuthContext.Provider> */}
+      <Login />
 
     </div>
 
