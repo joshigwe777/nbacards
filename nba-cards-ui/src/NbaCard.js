@@ -1,14 +1,14 @@
 import React from "react";
 function NbaCard({nbaCard}) {
     return <div className="card">
-        <img className="card-image"/>
+        <img className="card-image" src={nbaCard.imgUrl} alt="card image"/>
         <div className="card-body">
-            <h5 className="card-title">Player Name</h5>
-            <p>Team</p>
-            <p>Position</p>
-            <p>Career ppg</p>
-            <p>Career apg</p>
-            <p>Career rpg</p>
+            <h5 className="card-title">{nbaCard.name}</h5>
+            <p>{nbaCard.teamId}</p>
+            <p>{nbaCard.position}</p>
+            <p>{nbaCard.ppg}</p>
+            <p>{nbaCard.apg}</p>
+            <p>{nbaCard.rpg}</p>
         </div>
 
     

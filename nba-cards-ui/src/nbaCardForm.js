@@ -1,6 +1,7 @@
-import { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import AuthContext from "./contexts/AuthContext";
+import ErrorSummary from "./ErrorSummary";
 
 
 const EMPTY_CARD = {
@@ -15,7 +16,7 @@ const EMPTY_CARD = {
 };
 
 
-function nbaCardForm() {
+function NbaCardForm() {
 
     const [nbaCard, setNbaCard] = useState(EMPTY_CARD);
     const [teams, setTeams] = useState([]);
@@ -80,4 +81,4 @@ function nbaCardForm() {
 
 
 }
-export default nbaCardForm;
+export default NbaCardForm;

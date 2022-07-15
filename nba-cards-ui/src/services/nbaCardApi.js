@@ -1,4 +1,4 @@
-const url = `${window.NBA_CARD_GAME_API_URL}/nbacard`;
+const url = `http://localhost:8080/nba-card`;
 
 export async function fetchAll() {
     const response = await fetch(url);

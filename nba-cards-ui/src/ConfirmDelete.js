@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { deleteById, fetchById } from "./services/nbaCardApi";
+import { deleteById, fetchById } from "./services/NbaCardApi";
 import AuthContext from "./contexts/AuthContext";
 import NotFound from "./NotFound";
 

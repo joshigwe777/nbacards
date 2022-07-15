@@ -4,6 +4,7 @@ import Heading from './Heading';
 import ConfirmDelete from './ConfirmDelete.js';
 import Login from './Login.js';
 import CardList from './CardList.js';
+import NbaCardForm from "./NbaCardForm";
 import NotFound from './NotFound.js';
 import AuthContext from './contexts/AuthContext';
 import jwt_decode from 'jwt-decode';
@@ -62,8 +63,8 @@ function App() {
         <Router>
           <Heading />
           <Routes>
-            <Route path={"/edit/:id"} element={<nbaCardForm />} />
-            <Route path={"/add"} element={<nbaCardForm />} />
+            <Route path={"/edit/:id"} element={<NbaCardForm />} />
+            <Route path={"/add"} element={<NbaCardForm />} />
             <Route path="/delete/:gameId/" element={auth.user.username && auth.user.isAdmin() ? <ConfirmDelete /> : <Link to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route exact path="/" element={<CardList />} />

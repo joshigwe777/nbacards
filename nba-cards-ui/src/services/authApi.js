@@ -1,4 +1,4 @@
-const url = `http://localhost8080/authenticate`;
+const url = `http://localhost:8080/authenticate`;
 
 export async function authenticate(credentials) {
     const init = {

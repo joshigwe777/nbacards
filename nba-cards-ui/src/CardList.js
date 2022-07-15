@@ -1,6 +1,6 @@
 import React, {useContext, useState, useEffect} from "react";
 import {Link} from "react-router-dom";
-import {fetchAll} from "./services/nbaCardApi";
+import {fetchAll} from "./services/NbaCardApi";
 import AuthContext from "./contexts/AuthContext";
 import NbaCard from "./NbaCard";
 
