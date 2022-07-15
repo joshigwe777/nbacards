@@ -24,7 +24,7 @@ function NbaCardList() {
 
     {auth.user.username && (
         <div>
-            <Link to="add" className="btn btn-info">Add Card</Link>
+            <Link to="/add" className="btn btn-info">Add Card</Link>
         </div>
     )}
 

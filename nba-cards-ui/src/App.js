@@ -58,30 +58,20 @@ function App() {
 
   return (
     <div className="container">
-      {/* <AuthContext.Provider value={auth}>
+      <AuthContext.Provider value={auth}>
         <Router>
           <Heading />
           <Routes>
-            <Route path={["/edit/:id", "/add"]}>
-              {auth.user.username ? <nbaCardForm /> : <Link to="/login" />}
-            </Route>
-            <Route path="/delete/:gameId/">
-              {auth.user.username && auth.user.isAdmin() ? <ConfirmDelete /> : <Link to="/login" />}
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/">
-              <CardList />
-            </Route>
-            <Route>
-              <NotFound />
-            </Route>
+            <Route path={["/edit/:id", "/add"]} element={auth.user.username ? <nbaCardForm /> : <Link to="/login" />} />
+            <Route path="/delete/:gameId/" element={auth.user.username && auth.user.isAdmin() ? <ConfirmDelete /> : <Link to="/login" />} />
+            <Route path="/login" element={<Login />} />
+            <Route exact path="/" element={<CardList />} />
+            <Route element={<NotFound />} />
           </Routes>
         </Router>
 
-      </AuthContext.Provider> */}
-      <Login />
+      </AuthContext.Provider>
+      
 
     </div>
 
