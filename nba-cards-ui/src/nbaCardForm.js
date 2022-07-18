@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
+import { fetchAll } from "./services/TeamApi";
 import AuthContext from "./contexts/AuthContext";
 import ErrorSummary from "./ErrorSummary";
+import { save } from "./services/NbaCardApi";
 
 
 const EMPTY_CARD = {
@@ -26,11 +28,17 @@ function NbaCardForm() {
 
     const handleSubmit = (evt) => {
         evt.preventDevault();
-        /*
-            fill in logic once the api methods are created 
-        */
+        save(nbaCard, auth.user.token)
+        .then(() => {
+        //   history.push("/");
+        })
+        .catch(setErrors);
     }
-
+    useEffect(() => {
+        fetchAll()
+          .then(setTeams)
+          .catch(console.log);
+      }, []);
     /*
         fetchAll and fetch by id will go here
     */
@@ -39,7 +47,7 @@ function NbaCardForm() {
         //this method should set the nbaCard to the next card that is entered in the form
         const nextNbaCard = { ...nbaCard };
         let nextValue = evt.target.value;
-        nextNbaCard[evt.target.value.name] = nextValue;
+        nextNbaCard[evt.target.name] = nextValue;
         setNbaCard(nextNbaCard);
 
     }
@@ -55,19 +63,19 @@ function NbaCardForm() {
                 <label className="form-label">Team</label>
                 <select className='form-control' value={nbaCard.teamId} name="teamId" onChange={handleChange} >
                     <option value="0">-- Choose team --</option>
-                    {teams.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
+                    {teams.map(t => <option key={t.id} value={t.teamName}>{t.teamName}</option>)}
                 </select>
             </div>
             <label className="form-label">Points Per Game</label>
-            <input className="form-control" type="text" value={nbaCard.ppg} name="name" onChange={handleChange} />
+            <input className="form-control" type="text" value={nbaCard.ppg} name="ppg" onChange={handleChange} />
             <div>
                 <label className="form-label">Assists Per game</label>
-                <input className="form-control" type="text" value={nbaCard.apg} name="name" onChange={handleChange} />
+                <input className="form-control" type="text" value={nbaCard.apg} name="apg" onChange={handleChange} />
 
             </div>
             <div>
                 <label className="form-label">Rebounds Per Game</label>
-                <input className="form-control" type="text" value={nbaCard.rpg} name="name" onChange={handleChange} />
+                <input className="form-control" type="text" value={nbaCard.rpg} name="rpg" onChange={handleChange} />
 
             </div>
 
