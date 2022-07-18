@@ -1,3 +1,22 @@
 @url = http://localhost:8080/nba-card
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJuYmEtY2FyZHMiLCJzdWIiOiJqb3NodWFAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VTRVIiLCJleHAiOjE2NTgxNzUyMTZ9.YhzfnFosODIchVe2pv7v6PtZqJGzT2-TPbu4TViFRgo
+
 
 GET {{url}}/3 HTTP/1.1
+
+###
+
+POST {{url}} HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "Kobe Bryant",
+    "ppg": 25.0,
+    "apg": 5.5,
+    "position": "sg",
+    "rpg": 5.0,
+    "imgUrl": "google.com",
+    "teamId": 5
+}
+

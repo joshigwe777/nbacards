@@ -29,16 +29,16 @@ function NbaCardForm() {
     const handleSubmit = (evt) => {
         evt.preventDevault();
         save(nbaCard, auth.user.token)
-        .then(() => {
-        //   history.push("/");
-        })
-        .catch(setErrors);
+            .then(() => {
+                //   history.push("/");
+            })
+            .catch(setErrors);
     }
     useEffect(() => {
         fetchAll()
-          .then(setTeams)
-          .catch(console.log);
-      }, []);
+            .then(setTeams)
+            .catch(console.log);
+    }, []);
     /*
         fetchAll and fetch by id will go here
     */
@@ -63,11 +63,23 @@ function NbaCardForm() {
                 <label className="form-label">Team</label>
                 <select className='form-control' value={nbaCard.teamId} name="teamId" onChange={handleChange} >
                     <option value="0">-- Choose team --</option>
-                    {teams.map(t => <option key={t.id} value={t.teamName}>{t.teamName}</option>)}
+                    {teams.map(t => <option key={t.id} value={t.id}>{t.teamName}</option>)}
                 </select>
             </div>
-            <label className="form-label">Points Per Game</label>
-            <input className="form-control" type="text" value={nbaCard.ppg} name="ppg" onChange={handleChange} />
+            <div>
+                <label className="form-label">Positon</label>
+                <select className="form-control" value={nbaCard.position} name="position" onChange={handleChange}>
+                    <option value="pg">pg</option>
+                    <option value="sg">sg</option>
+                    <option value="sf">sf</option>
+                    <option value="pf">pf</option>
+                    <option value="c">c</option>
+                </select>
+            </div>
+            <div>
+                <label className="form-label">Points Per Game</label>
+                <input className="form-control" type="text" value={nbaCard.ppg} name="ppg" onChange={handleChange} />
+            </div>
             <div>
                 <label className="form-label">Assists Per game</label>
                 <input className="form-control" type="text" value={nbaCard.apg} name="apg" onChange={handleChange} />
@@ -82,7 +94,7 @@ function NbaCardForm() {
             <button type="submit" className="btn btn-primary">Save</button>
             <Link to="/" className="btn btn-secondary">Cancel</Link>
         </form>
-        <ErrorSummary errors={errors}/>
+        <ErrorSummary errors={errors} />
 
     </>
 
