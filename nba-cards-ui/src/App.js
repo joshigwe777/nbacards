@@ -65,7 +65,7 @@ function App() {
           <Routes>
             <Route path={"/edit/:id"} element={<NbaCardForm />} />
             <Route path={"/add"} element={<NbaCardForm />} />
-            <Route path="/delete/:gameId/" element={auth.user.username && auth.user.isAdmin() ? <ConfirmDelete /> : <Link to="/login" />} />
+            <Route path="/delete/:gameId/" element={auth.user.username && auth.user.isAdmin ? <ConfirmDelete /> : <Link to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route exact path="/" element={<CardList />} />
             <Route element={<NotFound />} />

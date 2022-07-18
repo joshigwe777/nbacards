@@ -3,7 +3,7 @@
 
 
 
-POST  {{url2}} HTTP/1.1
+POST  {{url1}} HTTP/1.1
 Content-Type: application/json
 
 {
